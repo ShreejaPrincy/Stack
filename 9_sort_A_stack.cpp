@@ -9,6 +9,9 @@
 //✅ if (st.empty() || st.top() <= x)
 //❌ if (st.top() <= x || st.empty()) → causes undefined behavior
 
+//Time Complexity: O(n²)
+//Space Complexity: O(n)
+
 #include <bits/stdc++.h> 
 void insert_at_position(stack<int>&st,int x){
 	if(st.empty() || st.top()<=x){
