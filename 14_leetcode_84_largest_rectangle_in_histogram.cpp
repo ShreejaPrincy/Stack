@@ -61,5 +61,37 @@ public:
 
 
 //Approach-2
-
+//Time Complexity — O(n)
+//Space Complexity — O(n)
+//doitagain
+    
   
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        stack<int> st;   // store indices
+        int area = 0;
+        int n = heights.size();
+
+        for (int i = 0; i <= n; i++) {
+            int curr = (i == n ? 0 : heights[i]);
+
+            while (!st.empty() && curr < heights[st.top()]) {
+                int minimum = heights[st.top()];
+                st.pop();
+
+                int right = i;
+                int left = st.empty() ? -1 : st.top();
+                int width = right - left - 1;
+
+                area = max(area, minimum * width);
+            }
+            st.push(i);
+        }
+        return area;
+    }
+};
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
