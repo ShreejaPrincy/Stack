@@ -29,3 +29,43 @@ class Solution {
         return arr;
     }
 };
+
+
+
+
+
+
+
+//
+// Time Complexity: O(n)
+//
+// We traverse the array once from right to left.
+// Each element is pushed and popped from the stack at most once.
+// Therefore, the overall time complexity is O(n).
+//
+// Space Complexity: O(n)
+//
+// The answer vector stores n elements.
+// The stack can store up to n elements in the worst case.
+// Therefore, the overall space complexity is O(n).
+class Solution {
+  public:
+    vector<int> nextSmallerEle(vector<int>& arr) {
+        stack<int> st;
+        vector<int> nse(arr.size(), -1);
+
+        for(int i = arr.size() - 1; i >= 0; i--) {
+            while(!st.empty() && st.top() >= arr[i]) {
+                st.pop();
+            }
+
+            if(!st.empty()) {
+                nse[i] = st.top();
+            }
+
+            st.push(arr[i]);
+        }
+
+        return nse;
+    }
+};
