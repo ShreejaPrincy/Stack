@@ -58,3 +58,56 @@ public:
         return (int)area;
     }
 };
+
+
+
+//Approach -2 
+
+// Time Complexity: O(n)
+//
+// We traverse the histogram once.
+// Each index is pushed into the stack at most once and popped at most once.
+// The remaining elements in the stack are also processed once at the end.
+// Therefore, the overall time complexity is O(n).
+//
+// Space Complexity: O(n)
+//
+// We use a stack to store indices of histogram bars.
+// In the worst case, the stack can store up to n indices.
+// Therefore, the overall space complexity is O(n).
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int n=heights.size();
+        stack<int>st;
+        int area=0;
+
+        for(int i=0;i<n;i++){
+            while(!st.empty() && heights[st.top()]>=heights[i]){
+                int curr_ele=heights[st.top()];
+                st.pop();
+                
+                int nse=i;
+                int pse=st.empty()?-1:st.top();
+
+                area=max(area, (nse-pse-1)*curr_ele);
+            }
+            st.push(i);
+        }
+
+        while(!st.empty()){
+            int curr_ele=heights[st.top()];
+            st.pop();
+            
+            int nse=n;
+            int pse=st.empty()?-1:st.top();
+
+            area=max(area, (nse-pse-1)*curr_ele);
+        }
+        
+        return area;
+    }
+};
+
+
